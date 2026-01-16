@@ -1,8 +1,8 @@
 <script>
-  import { onMount } from 'svelte';
-  import Chart from 'chart.js/auto';
+  import { onMount } from "svelte";
+  import Chart from "chart.js/auto";
 
-  export let title = 'Chart';
+  export let title = "Chart";
   export let labels = [];
   export let datasets = [];
   export let logScale = false;
@@ -13,17 +13,17 @@
   $: if (chart) {
     chart.data.labels = labels;
     chart.data.datasets = datasets;
-    chart.options.scales.y.type = logScale ? 'logarithmic' : 'linear';
+    chart.options.scales.y.type = logScale ? "logarithmic" : "linear";
     chart.update();
   }
 
   onMount(() => {
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     chart = new Chart(ctx, {
-      type: 'line',
+      type: "line",
       data: {
         labels: labels,
-        datasets: datasets
+        datasets: datasets,
       },
       options: {
         responsive: true,
@@ -32,29 +32,29 @@
           title: {
             display: true,
             text: title,
-            color: '#e0e0e0',
-            font: { size: 16 }
+            color: "#334155", // Slate-700
+            font: { size: 16 },
           },
           legend: {
-            labels: { color: '#cccccc' }
-          }
+            labels: { color: "#475569" }, // Slate-600
+          },
         },
         scales: {
           x: {
-            ticks: { color: '#aaaaaa' },
-            grid: { color: '#444444' }
+            ticks: { color: "#64748b" }, // Slate-500
+            grid: { color: "#cbd5e1" }, // Slate-300
           },
           y: {
-            type: logScale ? 'logarithmic' : 'linear',
-            ticks: { color: '#aaaaaa' },
-            grid: { color: '#444444' }
-          }
+            type: logScale ? "logarithmic" : "linear",
+            ticks: { color: "#64748b" },
+            grid: { color: "#cbd5e1" },
+          },
         },
         interaction: {
-            mode: 'index',
-            intersect: false,
-        }
-      }
+          mode: "index",
+          intersect: false,
+        },
+      },
     });
 
     return () => {
